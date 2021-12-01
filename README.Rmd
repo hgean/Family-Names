@@ -1,0 +1,50 @@
+---
+title: "Hannah's Family's Name Popularity"
+output: github_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+```{r echo=FALSE, warning=FALSE, message=FALSE}
+library(nycflights13)
+library(ggplot2)
+library(dplyr)
+library(knitr)
+library(gapminder)
+library(RColorBrewer)
+library(babynames)
+```
+
+
+# Family Names
+
+## Matriarch
+
+```{r warning=FALSE}
+
+babyname_hannah <- babynames %>% 
+  filter((name == "Hannah" | name == "Mary" | name == "Elsie") & sex == "F") %>% 
+  mutate(Total_Births = n, Year = year, Name = name)
+
+
+ggplot(babyname_hannah, aes(x = Year, y = Total_Births, color = Name)) +
+  geom_line()
+
+
+```
+
+## Patriarch
+
+```{r message=FALSE, warning=FALSE}
+babyname_jesse <- babynames %>% 
+  filter((name == "Jesse" | name == "Daniel" | name == "Charles") & sex == "M") %>% 
+  mutate(Total_Births = n, Year = year, Name = name)
+
+
+ggplot(babyname_jesse, aes(x = Year, y = Total_Births, color = Name)) +
+  geom_line()
+```
+
